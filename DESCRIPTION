@@ -1,7 +1,7 @@
 Package: LUniFrac
 Title: Creates a longitudinal UniFrac distance matrix
 Version: 0.0.0.9000
-Author: Anna Plantinga
+Author: Anna Plantinga, Jun Chen
 Maintainer: Anna Plantinga <amp9@williams.edu>
 Description: Creates a two-stage longitudinal UniFrac dissimilarity. This enables comparisons of changes in the microbiome across time between multiple treatments or conditions. 
 Depends: R (>= 3.4.3)
