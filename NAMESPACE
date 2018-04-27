@@ -3,3 +3,4 @@
 export(LUniFrac)
 importFrom(ape,drop.tip)
 importFrom(ape,is.rooted)
+importFrom(ape,rtree)

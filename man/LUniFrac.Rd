@@ -16,7 +16,7 @@ LUniFrac(otu.tab, tree, alpha = c(0, 0.5, 1), metadata)
 \item{metadata}{Data frame with three columns: sample identifiers (must match row names of otu.tab), subject identifiers (n unique values), and time point (variable with two unique levels).}
 }
 \value{
-Returns a (K+1) dimensional array containing the longitudinal UniFrac dissimilarities with the K specified alpha values plus the unweighted distance.
+Returns a (K+1) dimensional array containing the longitudinal UniFrac dissimilarities with the K specified alpha values plus the unweighted distance. The unweighted dissimilarity matrix may be accessed by result[,,"d_UW"], and the generalized dissimilarities by result[,,"d_A"] where A is the particular choice of alpha.
 }
 \description{
 Longitudinal UniFrac distances for comparing changes in
@@ -30,4 +30,19 @@ difference of these differences, resulting in a dissimilarity
 matrix that can be used as-is or converted to a kernel
 (similarity) matrix for hypothesis testing with MIRKAT
 and related methods.
+}
+\examples{
+## Example: simulated tree and OTU table
+ntaxa = 5; nsubj = 10
+library(ape)
+sim.tree = rtree(n=ntaxa)  # simulated rooted phylogenetic tree
+sim.otu <- matrix(runif(2*ntaxa*nsubj, 0, 100), nrow = 2*nsubj)
+for (i in 1:nrow(sim.otu)) { sim.otu[i, ] <- sim.otu[i, ] / sum(sim.otu[i, ]) }
+rownames(sim.otu) <- paste("Subj", rep(1:nsubj, each = 2), "_Time", rep(1:2, nsubj), sep = "")  # Row names must match samples in metadata
+colnames(sim.otu) <- paste("t", 1:ntaxa, sep = "")   # Column names must match tree tip labels
+sim.meta <- data.frame(sampleID = rownames(sim.otu), subjID = rep(paste("Subj", 1:nsubj, sep = ""), each = 2), time = rep(c(1,2), nsubj))
+Ds <- LUniFrac(otu.tab = sim.otu, tree = sim.tree, alpha = c(0, 0.5, 1), metadata = sim.meta)
+D_unweighted <- Ds[,,"d_UW"]   ## access individual array elements
+D_gen_a0.5 <- Ds[,,"d_0.5"]
+
 }
