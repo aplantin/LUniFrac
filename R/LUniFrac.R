@@ -149,7 +149,6 @@ LUniFrac <- function (otu.tab, tree, alpha = c(0, 0.5, 1), metadata) {
       }
 
       #	Unweighted UniFrac Distance
-      ## This changed in v2
       d1 <- cum.diff.uw[, i]
       d2 <- cum.diff.uw[, j]
       diff <- abs(d2 - d1)/2
