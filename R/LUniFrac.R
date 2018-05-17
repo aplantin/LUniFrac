@@ -140,7 +140,7 @@ LUniFrac <- function (otu.tab, tree, alpha = c(0, 0.5, 1), metadata) {
       avg2 <- avg2[ind]
       br.len2 <- br.len[ind]
 
-      diff <- abs(d2 - d1) / (abs(d1) + abs(d2))
+      diff <- abs(d2 - d1) / 2 
 
       # Generalized UniFrac distance
       for(k in 1:length(alpha)){
