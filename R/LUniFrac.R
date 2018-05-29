@@ -84,7 +84,6 @@ LUniFrac <- function (otu.tab, tree, alpha = c(0, 0.5, 1), metadata) {
     }
   }
 
-  ### *** Up to this point, same as GUniFrac -- now we change *** ###
   ### Step 1: calculate within-subject distance data
   metadata[,3] <- as.numeric(as.factor(metadata[,3]))
   cum.t1 <- cum[, which(metadata[,3] == 1)]
@@ -140,15 +139,15 @@ LUniFrac <- function (otu.tab, tree, alpha = c(0, 0.5, 1), metadata) {
       avg2 <- avg2[ind]
       br.len2 <- br.len[ind]
 
-      diff <- abs(d2 - d1) / 2 
+      diff <- abs(d2 - d1)/2 
 
-      # Generalized UniFrac distance
+      # Generalized LUniFrac dissimilarity
       for(k in 1:length(alpha)){
         w <- br.len2 * (avg1 + avg2)^alpha[k]
         lunifracs[i, j, k] = lunifracs[j, i, k] = sum(diff * w) / sum(w)
       }
 
-      #	Unweighted UniFrac Distance
+      #	Unweighted LUniFrac Distance
       d1 <- cum.diff.uw[, i]
       d2 <- cum.diff.uw[, j]
       diff <- abs(d2 - d1)/2
